@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /admin-setup.html
+
+Sitemap: https://dairygarden.in/sitemap.xml
