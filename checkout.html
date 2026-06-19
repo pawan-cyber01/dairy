@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout | Dairy Garden</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .checkout-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 40px;
+            padding: 40px 0;
+            align-items: start;
+        }
+
+        .checkout-section {
+            background: var(--surface-color);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            margin-bottom: 32px;
+        }
+
+        .section-heading {
+            font-size: 1.5rem;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .payment-box {
+            padding: 24px;
+            border: 2px solid var(--brand-color);
+            border-radius: var(--radius-md);
+            background: rgba(43, 78, 56, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .payment-box input[type="radio"] {
+            transform: scale(1.5);
+            accent-color: var(--brand-color);
+        }
+
+        /* Order Summary Sidebar */
+        .summary-sidebar {
+            background: var(--bg-color);
+            padding: 32px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            position: sticky;
+            top: 100px;
+        }
+
+        .mini-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .mini-item-img {
+            width: 60px;
+            height: 60px;
+            background: var(--surface-color);
+            border-radius: var(--radius-sm);
+            object-fit: contain;
+            padding: 4px;
+        }
+
+        .totals-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+        }
+
+        .final-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--brand-color);
+        }
+
+        /* Loading Overlay */
+        #loading-overlay {
+            position: fixed;
+            top:0; left:0; right:0; bottom:0;
+            background: rgba(250, 246, 237, 0.9);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            display: none;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--border-color);
+            border-top-color: var(--brand-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 24px;
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        @media (max-width: 1024px) {
+            .checkout-layout { grid-template-columns: 1fr; }
+            .summary-sidebar { position: static; }
+        }
+    </style>
+</head>
+<body>
+
+        <header class="header-main">
+        <div class="container header-container">
+            <a href="index.html" class="logo-container">
+                <img src="logo.png" alt="Dairy Garden Logo" class="logo-img">
+                <span style="font-size:1.2rem; font-style:italic;">DairyGarden</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search for products, brands and more">
+                <span class="search-icon">🔍</span>
+            </div>
+
+            <div class="header-actions">
+                <a href="cart.html" class="header-link">
+                    🛒
+                    <span class="badge" id="header-cart-badge" style="display:none;">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="loading-overlay">
+            <div class="spinner"></div>
+            <h2 style="color: var(--brand-color);">Processing your order...</h2>
+            <p style="color: var(--text-secondary); margin-top: 8px;">Please do not close this window.</p>
+        </div>
+
+        <form id="checkout-form" class="checkout-layout">
+            <div>
+                <div class="checkout-section">
+                    <h2 class="section-heading">1. Delivery Options</h2>
+                    
+                    <div style="display: flex; gap: 16px; margin-bottom: 24px;">
+                        <label class="payment-box" style="flex:1; cursor: pointer; margin-bottom: 0;">
+                            <input type="radio" name="orderType" value="Delivery" checked onchange="window.toggleDeliveryType(this.value)">
+                            <div>
+                                <div style="font-weight: 600;">Home Delivery</div>
+                                <div style="font-size: 0.85rem; color: var(--text-secondary);">₹50 charge</div>
+                            </div>
+                        </label>
+                        <label class="payment-box" style="flex:1; cursor: pointer; margin-bottom: 0;">
+                            <input type="radio" name="orderType" value="Takeaway" onchange="window.toggleDeliveryType(this.value)">
+                            <div>
+                                <div style="font-weight: 600;">Store Takeaway</div>
+                                <div style="font-size: 0.85rem; color: var(--text-secondary);">Free</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <h2 class="section-heading" style="margin-top: 32px;">2. Customer Information</h2>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label class="form-label">Full Name *</label>
+                            <input type="text" id="c-name" class="form-control" required placeholder="e.g. Ramesh Kumar">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Phone Number *</label>
+                            <input type="tel" id="c-phone" class="form-control" required placeholder="e.g. 9876543210" pattern="[0-9]{10}">
+                        </div>
+                    </div>
+                    
+                    <div id="delivery-fields">
+                        <div class="form-group">
+                            <label class="form-label">Delivery Address *</label>
+                            <input type="text" id="c-address" class="form-control" required placeholder="House No, Street, Landmark">
+                        </div>
+                        
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label class="form-label">Area/Locality (Badaun Only) *</label>
+                                <input type="text" id="c-area" class="form-control" required placeholder="e.g. Civil Lines">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Pincode *</label>
+                                <input type="text" id="c-pin" class="form-control" required placeholder="243601" pattern="[0-9]{6}">
+                            </div>
+                        </div>
+
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label class="form-label">Delivery / Pickup Slot *</label>
+                                <select id="c-slot" class="form-control" required>
+                                    <option value="Morning (7 AM - 10 AM)">Morning (7 AM - 10 AM)</option>
+                                    <option value="Evening (5 PM - 8 PM)">Evening (5 PM - 8 PM)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Order Notes (Optional)</label>
+                                <input type="text" id="c-notes" class="form-control" placeholder="e.g. Please ring the doorbell">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment -->
+                <div class="checkout-section">
+                    <h2 class="section-heading">3. Payment Method</h2>
+                    
+                    <div class="payment-box" style="margin-bottom: 16px;">
+                        <input type="radio" name="payment" id="upi-advance" value="UPI_Advance" checked onchange="window.togglePaymentMethod()">
+                        <div>
+                            <label for="upi-advance" style="font-size: 1.1rem; font-weight: 600; cursor: pointer;">UPI Advance (₹50) + Rest COD</label>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 4px;">Pay ₹50 advance via QR code to confirm your order.</p>
+                        </div>
+                    </div>
+
+                    <div id="qr-payment-section" style="padding: 24px; background: #fff; border: 1px solid var(--border-color); border-radius: var(--radius-md); margin-bottom: 24px; text-align: center;">
+                        <h4 style="margin-bottom: 16px;">Scan to Pay ₹50</h4>
+                        <img id="store-qr-img" src="" alt="Store QR Code" style="width: 200px; height: 200px; object-fit: contain; margin: 0 auto 16px; display: none; border: 1px solid var(--border-color); border-radius: 8px; padding: 8px;">
+                        <p id="qr-loading-text" style="color: var(--text-secondary); margin-bottom: 16px;">Loading QR Code...</p>
+                        
+                        <div class="form-group" style="text-align: left; max-width: 300px; margin: 0 auto;">
+                            <label class="form-label">UPI Transaction ID / UTR *</label>
+                            <input type="text" id="c-utr" class="form-control" placeholder="e.g. 123456789012" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div>
+                <div class="summary-sidebar">
+                    <h3 style="margin-bottom: 24px;">Order Summary</h3>
+                    
+                    <div id="checkout-items"></div>
+                    
+                    <div class="totals-row" style="margin-top: 24px;">
+                        <span>Subtotal</span>
+                        <span id="sum-subtotal">₹0</span>
+                    </div>
+                    <div class="totals-row">
+                        <span>Delivery Fee</span>
+                        <span id="sum-delivery">₹0</span>
+                    </div>
+                    
+                    <div class="final-total">
+                        <span>Total to Pay</span>
+                        <span id="sum-total">₹0</span>
+                    </div>
+
+                    <button type="submit" class="btn-primary" style="width: 100%; margin-top: 32px; font-size: 1.1rem;">Place Order Now</button>
+                    <p style="text-align: center; color: var(--text-secondary); font-size: 0.85rem; margin-top: 16px;">
+                        By placing this order, you agree to our Terms of Service and Privacy Policy.
+                    </p>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <footer style="margin-top: 80px;">
+        <div class="container text-center text-secondary">
+            &copy; 2026 Dairy Garden. All rights reserved.
+        </div>
+    </footer>
+
+    <script type="module" src="checkout.js"></script>
+</body>
+</html>
+
+
+
+
+
+

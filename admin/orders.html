@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders Management | Admin Dashboard</title>
+    <link rel="stylesheet" href="../index.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <div class="admin-layout" id="admin-content">
+        <aside class="admin-sidebar" id="admin-sidebar">
+            <a href="index.html" class="admin-logo">
+                <img src="../logo.png" alt="Logo" style="height: 32px;">
+                Dairy Garden Admin
+            </a>
+            <nav class="admin-nav">
+                <a href="index.html" class="admin-nav-item">📊 Dashboard</a>
+                <a href="orders.html" class="admin-nav-item active">🛒 Orders</a>
+                <a href="products.html" class="admin-nav-item">📦 Products</a>
+                <a href="settings.html" class="admin-nav-item">⚙️ Settings</a>
+            </nav>
+        </aside>
+
+        <main class="admin-main">
+            <div class="mobile-header">
+                <img src="../logo.png" alt="Logo" style="height: 32px;">
+                <button class="mobile-menu-btn" onclick="document.getElementById('admin-sidebar').classList.toggle('open')">☰</button>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;" class="no-print">
+                <h1 style="font-size: 2rem; font-family: var(--font-sans);">Orders Management</h1>
+                <select id="filter-status" style="padding: 8px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                    <option value="All">All Orders</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Out For Delivery">Out For Delivery</option>
+                </select>
+            </div>
+
+            <div id="orders-container">
+                <p>Loading orders...</p>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="orders.js"></script>
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dairy Garden | Premium Dairy Essentials</title>
+    <meta name="description" content="Farm Fresh Paneer, Ghee, Curd, Butter and More Delivered Across Badaun.">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2B4E38">
+    <link rel="stylesheet" href="index.css">
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        /* Home Specific Styles */
+        .hero {
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            background: var(--bg-color);
+            overflow: hidden;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, var(--bg-color) 40%, transparent 100%),
+                        linear-gradient(to top, var(--bg-color) 0%, transparent 40%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 600px;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: var(--brand-color);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .hero-image {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 80%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        /* Swiper Styles */
+        .swiper-container {
+            padding: 20px 0 60px;
+        }
+
+        /* Categories */
+        .category-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 16px;
+            padding: 24px;
+            border-radius: var(--radius-lg);
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .category-card:hover {
+            border-color: var(--brand-color);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .category-img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+
+        /* Features */
+        .feature-card {
+            text-align: center;
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 24px;
+            color: var(--brand-color);
+        }
+
+        @media (max-width: 1024px) {
+            .hero-title { font-size: 3rem; }
+            .hero-image { opacity: 0.2; width: 100%; border-radius: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="notice-bar">
+        🚚 Delivery only in Badaun City &nbsp; | &nbsp; ⏰ Order 12–24 hours in advance
+    </div>
+
+    <!-- Header -->
+    <header class="header-main">
+        <div class="container header-container">
+            <a href="index.html" class="logo-container">
+                <img src="logo.png" alt="Dairy Garden Logo" class="logo-img">
+                Dairy Garden
+            </a>
+            
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="header-actions">
+                <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme">🌙</button>
+                <a href="cart.html" class="icon-btn" aria-label="Cart">
+                    🛒
+                    <span class="badge" id="header-cart-badge" style="display:none;">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=1200" alt="Fresh Milk" class="hero-image gs-fade-right">
+            <div class="container">
+                <div class="hero-content gs-fade-up">
+                    <h1 class="hero-title">Fresh Dairy Products<br>Delivered Daily</h1>
+                    <p class="hero-subtitle">Farm Fresh Paneer, Ghee, Curd, Butter and More Delivered Across Badaun.</p>
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <a href="products.html" class="btn-primary">Shop Now</a>
+                        <a href="#featured" class="btn-outline">View Products</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Featured Products -->
+        <section id="featured" class="py-5">
+            <div class="container">
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px;" class="gs-fade-up">
+                    <div>
+                        <h2 class="section-title" style="margin-bottom: 8px;">Featured Products</h2>
+                        <p style="color: var(--text-secondary);">Our handpicked premium selections.</p>
+                    </div>
+                    <a href="products.html" class="btn-outline">View All</a>
+                </div>
+
+                <div class="swiper swiper-container gs-fade-up">
+                    <div class="swiper-wrapper" id="featured-products-container">
+                        <!-- Products injected via home.js -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section class="py-5" style="background: var(--surface-color);">
+            <div class="container">
+                <div class="text-center gs-fade-up">
+                    <h2 class="section-title">Why Dairy Garden?</h2>
+                    <p class="section-subtitle">We believe in purity, freshness, and uncompromising quality.</p>
+                </div>
+                
+                <div class="grid-3 gs-fade-up" style="margin-top: 48px;">
+                    <div class="feature-card">
+                        <div class="feature-icon">🌿</div>
+                        <h3 style="margin-bottom: 16px;">100% Pure & Natural</h3>
+                        <p style="color: var(--text-secondary);">No preservatives, no adulteration. Just pure dairy goodness as nature intended.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🚚</div>
+                        <h3 style="margin-bottom: 16px;">Daily Fresh Delivery</h3>
+                        <p style="color: var(--text-secondary);">From our farms to your doorstep within 24 hours to ensure maximum freshness.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h3 style="margin-bottom: 16px;">Hygienic Processing</h3>
+                        <p style="color: var(--text-secondary);">State-of-the-art facilities with strict zero-touch processing protocols.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="grid-4">
+                <div style="grid-column: span 2;">
+                    <a href="index.html" class="logo-container" style="margin-bottom: 24px;">
+                        <img src="logo.png" alt="Dairy Garden Logo" class="logo-img">
+                        Dairy Garden
+                    </a>
+                    <p style="color: var(--text-secondary); max-width: 400px; margin-bottom: 24px;">
+                        Premium dairy products delivered fresh in Badaun. We combine traditional purity with modern hygiene.
+                    </p>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 24px; color: var(--text-primary);">Quick Links</h4>
+                    <ul style="display: flex; flex-direction: column; gap: 12px; color: var(--text-secondary);">
+                        <li><a href="products.html">Shop All</a></li>
+                        <li></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 24px; color: var(--text-primary);">Legal</h4>
+                    <ul style="display: flex; flex-direction: column; gap: 12px; color: var(--text-secondary);">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Return Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Dairy Garden. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script type="module" src="home.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js');
+            });
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+

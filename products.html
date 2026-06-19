@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Products | Dairy Garden</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .shop-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 40px;
+            padding: 40px 0;
+        }
+
+        .filter-sidebar {
+            background: var(--surface-color);
+            padding: 24px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .filter-group {
+            margin-bottom: 24px;
+        }
+
+        .filter-title {
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            font-family: var(--font-sans);
+            color: var(--text-primary);
+        }
+
+        .filter-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .shop-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .sort-select {
+            padding: 10px 16px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            background: var(--surface-color);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            cursor: pointer;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .search-bar-container {
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 16px 12px 40px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            background: var(--surface-color);
+            color: var(--text-primary);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 1024px) {
+            .shop-container { grid-template-columns: 1fr; padding: 24px 0; }
+            .filter-sidebar { position: static; margin-bottom: 24px; padding: 16px; }
+            .products-grid { grid-template-columns: 1fr; }
+            
+            .filter-group { margin-bottom: 16px; }
+            .category-list {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+            .filter-label {
+                background: var(--surface-color);
+                border: 1px solid var(--border-color);
+                padding: 8px 16px;
+                border-radius: 100px;
+                margin-bottom: 0;
+                font-size: 0.9rem;
+            }
+            .filter-title { margin-bottom: 12px; }
+        }
+
+        @media (max-width: 640px) {
+            .products-grid { grid-template-columns: 1fr; }
+            .shop-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+        <header class="header-main">
+        <div class="container header-container">
+            <a href="index.html" class="logo-container">
+                <img src="logo.png" alt="Dairy Garden Logo" class="logo-img">
+                <span style="font-size:1.2rem; font-style:italic;">DairyGarden</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search for products, brands and more">
+                <span class="search-icon">🔍</span>
+            </div>
+
+            <div class="header-actions">
+                <a href="cart.html" class="header-link">
+                    🛒
+                    <span class="badge" id="header-cart-badge" style="display:none;">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="shop-container">
+            <!-- Sidebar -->
+            <aside class="filter-sidebar">
+                <div class="search-bar-container">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" id="search-input" placeholder="Search products...">
+                </div>
+
+                <div class="filter-group">
+                    <h4 class="filter-title">Categories</h4>
+                    <div class="category-list">
+                        <label class="filter-label"><input type="radio" name="category" value="All" checked> All Products</label>
+                        <label class="filter-label"><input type="radio" name="category" value="Paneer"> Paneer</label>
+                        <label class="filter-label"><input type="radio" name="category" value="Ghee"> Ghee</label>
+                        <label class="filter-label"><input type="radio" name="category" value="Curd"> Curd</label>
+                        <label class="filter-label"><input type="radio" name="category" value="Butter"> Butter</label>
+                        <label class="filter-label"><input type="radio" name="category" value="Milk"> Milk</label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4 class="filter-title">Availability</h4>
+                    <label class="filter-label"><input type="checkbox" id="instock-only"> In Stock Only</label>
+                </div>
+            </aside>
+
+            <!-- Main Shop Area -->
+            <div>
+                <div class="shop-header">
+                    <div>
+                        <h1 style="font-size: 2rem;">Shop Premium Dairy</h1>
+                        <p style="color: var(--text-secondary);" id="results-count">Loading products...</p>
+                    </div>
+                    <div>
+                        <select class="sort-select" id="sort-select">
+                            <option value="newest">Newest First</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="products-grid" id="products-grid">
+                    <!-- Injected via JS -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center text-secondary">
+            &copy; 2026 Dairy Garden. All rights reserved.
+        </div>
+    </footer>
+
+    <script type="module" src="products-client.js"></script>
+</body>
+</html>
+
+
+
+
+
+

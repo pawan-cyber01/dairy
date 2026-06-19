@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store Settings | Admin Dashboard</title>
+    <link rel="stylesheet" href="../index.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <div class="admin-layout" id="admin-content">
+        <aside class="admin-sidebar" id="admin-sidebar">
+            <a href="index.html" class="admin-logo">
+                <img src="../logo.png" alt="Logo" style="height: 32px;">
+                Dairy Garden Admin
+            </a>
+            <nav class="admin-nav">
+                <a href="index.html" class="admin-nav-item">📊 Dashboard</a>
+                <a href="orders.html" class="admin-nav-item">🛒 Orders</a>
+                <a href="products.html" class="admin-nav-item">📦 Products</a>
+                <a href="settings.html" class="admin-nav-item active">⚙️ Settings</a>
+            </nav>
+        </aside>
+
+        <main class="admin-main">
+            <div class="mobile-header">
+                <img src="../logo.png" alt="Logo" style="height: 32px;">
+                <button class="mobile-menu-btn" onclick="document.getElementById('admin-sidebar').classList.toggle('open')">☰</button>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">
+                <h1 style="font-size: 2rem; font-family: var(--font-sans);">Store Settings</h1>
+            </div>
+
+            <div style="background: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 32px; max-width: 600px;">
+                <form id="settings-form">
+                    
+                    <div class="form-group" style="margin-bottom: 24px;">
+                        <label class="form-label" style="display: block; font-weight: 600;">Store Logo</label>
+                        <img id="logo-preview" src="../logo.png" style="height: 80px; object-fit: contain; margin-bottom: 12px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 8px;">
+                        <input type="file" id="s-logo" class="form-control" accept="image/*">
+                        <input type="hidden" id="s-logo-url">
+                        <small style="color: var(--text-secondary); display: block; margin-top: 4px;">Upload a new logo to replace the current one.</small>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 24px; padding-top: 24px; border-top: 1px solid var(--border-color);">
+                        <label class="form-label" style="display: block; font-weight: 600;">UPI Payment QR Code</label>
+                        <img id="qr-preview" src="" style="height: 150px; object-fit: contain; margin-bottom: 12px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 8px; display: none;">
+                        <input type="file" id="s-qr" class="form-control" accept="image/*">
+                        <input type="hidden" id="s-qr-url">
+                        <small style="color: var(--text-secondary); display: block; margin-top: 4px;">Upload the store's UPI QR Code to accept ₹50 advance payments during checkout.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" style="font-weight: 600;">Support Email</label>
+                        <input type="email" id="s-email" class="form-control" placeholder="support@dairygarden.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" style="font-weight: 600;">Support Phone Number</label>
+                        <input type="tel" id="s-phone" class="form-control" placeholder="+91 9876543210" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" style="font-weight: 600;">Store Address</label>
+                        <textarea id="s-address" class="form-control" rows="3" placeholder="123 Dairy Lane..."></textarea>
+                    </div>
+
+                    <button type="submit" id="save-settings-btn" class="btn-primary" style="width: 100%; margin-top: 16px;">Save Settings</button>
+                    <div id="settings-status" style="margin-top: 16px; text-align: center; font-weight: 500; display: none;"></div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="settings.js"></script>
+</body>
+</html>
+
+
+
+
+

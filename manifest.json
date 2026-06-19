@@ -1,0 +1,21 @@
+{
+  "name": "Dairy Garden",
+  "short_name": "DairyGarden",
+  "description": "Premium Dairy Products delivered fresh in Badaun",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#FAF6ED",
+  "theme_color": "#2B4E38",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | Dairy Garden</title>
+    <link rel="stylesheet" href="index.css">
+    
+    <style>
+        .product-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            padding: 40px 0;
+            align-items: start;
+        }
+
+        /* Gallery */
+        .gallery-wrap {
+            position: sticky;
+            top: 100px;
+            display: flex;
+            gap: 24px;
+        }
+
+        .thumbnails {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .thumb {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-sm);
+            background: var(--surface-color);
+            border: 2px solid transparent;
+            cursor: pointer;
+            padding: 8px;
+            transition: var(--transition);
+        }
+
+        .thumb.active, .thumb:hover {
+            border-color: var(--brand-color);
+        }
+
+        .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .main-image-box {
+            flex: 1;
+            background: var(--surface-color);
+            border-radius: var(--radius-lg);
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            cursor: zoom-in;
+            overflow: hidden;
+        }
+
+        .main-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s;
+        }
+
+        .main-image-box:hover img {
+            transform: scale(1.5);
+        }
+
+        /* Details */
+        .p-title {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .p-meta {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 32px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .price-section {
+            padding: 24px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 32px;
+        }
+
+        .p-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--brand-color);
+        }
+
+        .weight-options {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+
+        .weight-btn {
+            padding: 12px 24px;
+            border: 2px solid var(--border-color);
+            background: transparent;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-primary);
+        }
+
+        .weight-btn.active {
+            border-color: var(--brand-color);
+            background: rgba(43, 78, 56, 0.05);
+            color: var(--brand-color);
+        }
+
+        .actions {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .qty-box {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            border-radius: 100px;
+            padding: 4px;
+            background: var(--surface-color);
+        }
+
+        .qty-btn {
+            background: transparent;
+            border: none;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
+        .qty-input {
+            width: 40px;
+            text-align: center;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Tabs */
+        .tabs-header {
+            display: flex;
+            gap: 32px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 24px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 16px 0;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .tab-btn.active {
+            color: var(--text-primary);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--brand-color);
+        }
+
+        .tab-panel {
+            display: none;
+            color: var(--text-secondary);
+        }
+
+        .tab-panel.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 900px) {
+            .product-layout { grid-template-columns: 1fr; }
+            .gallery-wrap { position: static; flex-direction: column-reverse; }
+            .thumbnails { flex-direction: row; overflow-x: auto; }
+        }
+    </style>
+</head>
+<body>
+
+        <header class="header-main">
+        <div class="container header-container">
+            <a href="index.html" class="logo-container">
+                <img src="logo.png" alt="Dairy Garden Logo" class="logo-img">
+                <span style="font-size:1.2rem; font-style:italic;">DairyGarden</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search for products, brands and more">
+                <span class="search-icon">🔍</span>
+            </div>
+
+            <div class="header-actions">
+                <a href="cart.html" class="header-link">
+                    🛒
+                    <span class="badge" id="header-cart-badge" style="display:none;">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="loading-msg" class="py-5 text-center">Loading product...</div>
+        
+        <div id="product-content" style="display: none;">
+            <div class="product-layout">
+                <!-- Gallery -->
+                <div class="gallery-wrap">
+                    <div class="thumbnails" id="thumb-container"></div>
+                    <div class="main-image-box">
+                        <img id="main-image" src="" alt="">
+                    </div>
+                </div>
+
+                <!-- Details -->
+                <div>
+                    <div style="margin-bottom: 16px;">
+                        <span class="badge" style="position:static; padding:6px 12px;" id="p-status">Available</span>
+                    </div>
+                    <h1 class="p-title" id="p-name"></h1>
+                    
+                    <div class="p-meta">
+                        <span style="color: var(--accent-color);">★★★★★</span>
+                        <span>4.9 (120 Reviews)</span>
+                    </div>
+
+                    <div class="price-section">
+                        <div class="p-price" id="p-price"></div>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">Inclusive of all taxes</div>
+                    </div>
+
+                    <div style="margin-bottom: 16px; font-weight: 600;">Select Weight:</div>
+                    <div class="weight-options" id="weight-container"></div>
+
+                    <div class="actions">
+                        <div class="qty-box">
+                            <button class="qty-btn" id="qty-minus">-</button>
+                            <input type="text" class="qty-input" id="qty-input" value="1" readonly>
+                            <button class="qty-btn" id="qty-plus">+</button>
+                        </div>
+                        <button class="btn-primary" id="btn-add-cart" style="flex: 1;">Add to Cart</button>
+                    </div>
+
+                    <button class="btn-outline" id="btn-wishlist" style="width: 100%; margin-bottom: 40px; justify-content: center;">♡ Add to Wishlist</button>
+
+                    <!-- Tabs -->
+                    <div>
+                        <div class="tabs-header">
+                            <button class="tab-btn active" data-target="tab-desc">Description</button>
+                            <button class="tab-btn" data-target="tab-nutri">Nutrition Facts</button>
+                            <button class="tab-btn" data-target="tab-store">Storage Info</button>
+                        </div>
+                        
+                        <div class="tab-panel active" id="tab-desc"></div>
+                        <div class="tab-panel" id="tab-nutri"></div>
+                        <div class="tab-panel" id="tab-store"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer style="margin-top: 80px;">
+        <div class="container text-center text-secondary">
+            &copy; 2026 Dairy Garden. All rights reserved.
+        </div>
+    </footer>
+
+    <script type="module" src="product.js"></script>
+</body>
+</html>
+
+
+
+
+
+

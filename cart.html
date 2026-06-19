@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart | Dairy Garden</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            padding: 40px 0;
+            align-items: start;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 24px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            background: var(--surface-color);
+            margin-bottom: 24px;
+        }
+
+        .cart-img-box {
+            width: 120px;
+            height: 120px;
+            background: var(--bg-color);
+            border-radius: var(--radius-md);
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-img-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .cart-details {
+            flex: 1;
+        }
+
+        .qty-controls {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            border-radius: 100px;
+            margin-top: 12px;
+        }
+
+        .qty-btn {
+            background: transparent;
+            border: none;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
+        .qty-input {
+            width: 32px;
+            text-align: center;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .summary-box {
+            background: var(--surface-color);
+            padding: 32px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--brand-color);
+        }
+
+        @media (max-width: 900px) {
+            .cart-layout { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .cart-item { flex-direction: column; text-align: center; }
+            .cart-img-box { width: 100%; height: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+        <header class="header-main">
+        <div class="container header-container">
+            <a href="index.html" class="logo-container">
+                <img src="logo.png" alt="Dairy Garden Logo" class="logo-img">
+                <span style="font-size:1.2rem; font-style:italic;">DairyGarden</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search for products, brands and more">
+                <span class="search-icon">🔍</span>
+            </div>
+
+            <div class="header-actions">
+                <a href="cart.html" class="header-link">
+                    🛒
+                    <span class="badge" id="header-cart-badge" style="display:none;">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="cart-layout">
+            <div>
+                <h1 class="section-title">Your Cart</h1>
+                <div id="cart-items-container">
+                    <!-- Injected via JS -->
+                </div>
+            </div>
+
+            <div>
+                <div class="summary-box">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 24px;">Order Summary</h3>
+                    
+                    <div class="summary-row">
+                        <span>Subtotal (<span id="summary-items">0</span> items)</span>
+                        <span id="summary-subtotal">₹0</span>
+                    </div>
+                    
+                    <div class="summary-row" style="margin-bottom: 24px;">
+                        <span>Delivery</span>
+                        <select id="delivery-method" style="padding: 4px 8px; border-radius: 4px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-primary);">
+                            <option value="50">Home Delivery (₹50)</option>
+                            <option value="0">Take Away (Free)</option>
+                        </select>
+                    </div>
+
+                    <div class="summary-total">
+                        <span>Total</span>
+                        <span id="summary-total">₹0</span>
+                    </div>
+
+                    <button class="btn-primary" style="width: 100%; margin-top: 32px;" id="checkout-btn">Proceed to Checkout</button>
+                    <a href="products.html" class="btn-outline" style="width: 100%; margin-top: 16px; text-align: center; display: block;">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer style="margin-top: 80px;">
+        <div class="container text-center text-secondary">
+            &copy; 2026 Dairy Garden. All rights reserved.
+        </div>
+    </footer>
+
+    <script type="module" src="cart.js"></script>
+</body>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products Management | Admin Dashboard</title>
+    <link rel="stylesheet" href="../index.css">
+    <link rel="stylesheet" href="admin.css">
+    <style>
+        .variant-row {
+            display: flex; gap: 12px; margin-bottom: 12px; align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="admin-layout" id="admin-content">
+        <aside class="admin-sidebar" id="admin-sidebar">
+            <a href="index.html" class="admin-logo">
+                <img src="../logo.png" alt="Logo" style="height: 32px;">
+                Dairy Garden Admin
+            </a>
+            <nav class="admin-nav">
+                <a href="index.html" class="admin-nav-item">📊 Dashboard</a>
+                <a href="orders.html" class="admin-nav-item">🛒 Orders</a>
+                <a href="products.html" class="admin-nav-item active">📦 Products</a>
+                <a href="settings.html" class="admin-nav-item">⚙️ Settings</a>
+            </nav>
+        </aside>
+
+        <main class="admin-main">
+            <div class="mobile-header">
+                <img src="../logo.png" alt="Logo" style="height: 32px;">
+                <button class="mobile-menu-btn" onclick="document.getElementById('admin-sidebar').classList.toggle('open')">☰</button>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">
+                <h1 style="font-size: 2rem; font-family: var(--font-sans);">Products Management</h1>
+                <button class="btn-primary" id="btn-add-new">+ Add New Product</button>
+            </div>
+
+            <div style="background: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px;">
+                <table style="width: 100%; border-collapse: collapse; text-align: left;" id="products-table">
+                    <thead>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <th style="padding: 12px; color: var(--text-secondary); font-weight: 500;">Image</th>
+                            <th style="padding: 12px; color: var(--text-secondary); font-weight: 500;">Name</th>
+                            <th style="padding: 12px; color: var(--text-secondary); font-weight: 500;">Stock</th>
+                            <th style="padding: 12px; color: var(--text-secondary); font-weight: 500;">Status</th>
+                            <th style="padding: 12px; color: var(--text-secondary); font-weight: 500;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="products-list">
+                        <!-- Filled by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Product Modal -->
+    <div class="modal-overlay" id="product-modal">
+        <div class="modal">
+            <button class="close-btn" id="close-modal">&times;</button>
+            <h2 id="modal-title" style="margin-bottom: 24px;">Add New Product</h2>
+            
+            <form id="product-form">
+                <input type="hidden" id="p-id">
+                
+                <div class="form-group">
+                    <label class="form-label">Product Name *</label>
+                    <input type="text" class="form-control" id="p-name" required>
+                </div>
+                
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Stock Quantity *</label>
+                        <input type="number" class="form-control" id="p-stock" required min="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Status</label>
+                        <select class="form-control" id="p-status">
+                            <option value="Available">Available</option>
+                            <option value="Low Stock">Low Stock</option>
+                            <option value="Out Of Stock">Out Of Stock</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group" style="display: flex; align-items: center; gap: 12px; margin-top: 16px;">
+                    <input type="checkbox" id="p-active" checked style="width: 20px; height: 20px;">
+                    <label class="form-label" style="margin: 0;">Product is Active (Visible on store)</label>
+                </div>
+
+                <div class="form-group" style="margin-top: 16px;">
+                    <label class="form-label">Product Image</label>
+                    <input type="file" class="form-control" id="p-image-upload" accept="image/*">
+                    <input type="hidden" id="p-image-url">
+                    <img id="p-image-preview" src="" style="max-height: 100px; margin-top: 12px; display: none; border-radius: var(--radius-sm);">
+                </div>
+
+                <div class="form-group" style="background: rgba(0,0,0,0.02); padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                        <label class="form-label">Quantity & Price Options</label>
+                        <button type="button" id="btn-add-variant" class="btn-outline" style="padding: 4px 12px; font-size: 0.85rem;">+ Add Option</button>
+                    </div>
+                    <div id="variants-container">
+                        <!-- Variant rows injected here -->
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-control" id="p-desc" rows="3"></textarea>
+                </div>
+                
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Nutrition Facts</label>
+                        <textarea class="form-control" id="p-nutri" rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Storage Guide</label>
+                        <textarea class="form-control" id="p-store" rows="2"></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary" style="width: 100%;" id="save-btn">Save Product</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="products.js"></script>
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Admin Setup</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body style="display: flex; min-height: 100vh; align-items: center; justify-content: center; background: var(--bg-color);">
+    <div style="background: var(--surface-color); padding: 48px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); width: 100%; max-width: 400px; box-shadow: 0 10px 40px rgba(0,0,0,0.05);">
+        <h2 style="margin-bottom: 8px; font-family: var(--font-serif); color: var(--brand-color); text-align: center;">Initialize Admin</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 32px; text-align: center;">Set up your secure hashed credentials. This data will not be saved in the source code.</p>
+        
+        <div id="status" style="margin-bottom: 16px; display: none; font-weight: 500; text-align: center;"></div>
+
+        <form id="setup-form" style="text-align: left;">
+            <div style="margin-bottom: 16px;">
+                <label style="display: block; margin-bottom: 8px; font-weight: 500; font-size: 0.9rem;">New Admin ID</label>
+                <input type="text" id="setup-id" required style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--radius-sm);">
+            </div>
+            <div style="margin-bottom: 16px;">
+                <label style="display: block; margin-bottom: 8px; font-weight: 500; font-size: 0.9rem;">New Password</label>
+                <input type="password" id="setup-pass" required style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--radius-sm);">
+            </div>
+            <div style="margin-bottom: 24px;">
+                <label style="display: block; margin-bottom: 8px; font-weight: 500; font-size: 0.9rem;">6-Digit Security PIN</label>
+                <input type="password" id="setup-pin" required maxlength="6" pattern="[0-9]{6}" style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); letter-spacing: 4px; font-size: 1.2rem; text-align: center;">
+            </div>
+            <button type="submit" id="setup-btn" style="width: 100%; padding: 14px; background: var(--brand-color); color: white; border: none; border-radius: var(--radius-sm); font-weight: 600; cursor: pointer;">
+                Hash & Save to Database
+            </button>
+        </form>
+        
+        <p style="margin-top: 24px; font-size: 0.85rem; color: var(--text-secondary); text-align: center;">
+            *Once completed, delete these setup files for maximum security.
+        </p>
+    </div>
+    
+    <script type="module" src="admin-setup.js"></script>
+</body>
+</html>
+
+
+
+
+
+

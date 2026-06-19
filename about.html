@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Dairy Garden</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .about-hero {
+            background: rgba(43, 78, 56, 0.05);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 60px auto;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .about-content h2 {
+            color: var(--brand-color);
+            margin-bottom: 24px;
+            margin-top: 48px;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            margin: 40px 0;
+        }
+    </style>
+</head>
+<body>
+
+        <header class="header-main">
+        <div class="container header-container">
+            <a href="index.html" class="logo-container">
+                <img src="logo.png" alt="Dairy Garden Logo" class="logo-img">
+                <span style="font-size:1.2rem; font-style:italic;">DairyGarden</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search for products, brands and more">
+                <span class="search-icon">🔍</span>
+            </div>
+
+            <div class="header-actions">
+                <a href="cart.html" class="header-link">
+                    🛒
+                    <span class="badge" id="header-cart-badge" style="display:none;">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="about-hero">
+            <div class="container">
+                <h1 class="section-title">Our Story</h1>
+                <p class="section-subtitle">Bringing the purity of traditional dairy to modern homes in Badaun.</p>
+            </div>
+        </section>
+
+        <section class="container about-content">
+            <img src="https://images.unsplash.com/photo-1529686443422-790176ceb28a?w=1200" alt="Farm" class="about-image">
+            
+            <h2>Rooted in Tradition</h2>
+            <p>
+                Dairy Garden was born out of a simple desire: to bring unadulterated, farm-fresh dairy products back to the dining tables of Badaun. We noticed a gap between the traditional purity of dairy and the modern need for hygiene and convenience. Our mission is to bridge that gap.
+            </p>
+
+            <h2>Uncompromising Quality</h2>
+            <p>
+                From the way we source our milk to the final delivery at your doorstep, quality is at the heart of everything we do. Our state-of-the-art processing facility ensures that our Paneer is perfectly soft, our Ghee is rich in aroma, and our Curd is naturally thick—all without the use of artificial preservatives.
+            </p>
+
+            <h2>Community First</h2>
+            <p>
+                We are proud to serve Badaun City. By focusing on our local community, we ensure that our products spend less time in transit and more time retaining their natural freshness. When you choose Dairy Garden, you're not just choosing premium dairy; you're supporting local farmers and a commitment to health.
+            </p>
+            
+            <div style="text-align: center; margin-top: 60px;">
+                <a href="products.html" class="btn-primary">Explore Our Products</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container text-center text-secondary">
+            &copy; 2026 Dairy Garden. All rights reserved.
+        </div>
+    </footer>
+
+    <script type="module" src="utils.js"></script>
+    <script type="module">
+        import { initTheme, updateCartBadge } from './utils.js';
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            updateCartBadge();
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
