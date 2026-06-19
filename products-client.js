@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event listeners for filters
     document.getElementById('search-input').addEventListener('input', renderProducts);
+    document.getElementById('search-btn')?.addEventListener('click', renderProducts);
     document.getElementById('sort-select').addEventListener('change', renderProducts);
     document.getElementById('instock-only').addEventListener('change', renderProducts);
     

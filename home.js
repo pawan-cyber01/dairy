@@ -51,15 +51,6 @@ async function loadFeaturedProducts() {
             container.insertAdjacentHTML('beforeend', productHTML);
         });
 
-        new Swiper('.swiper-container', {
-            slidesPerView: 1.1,
-            spaceBetween: 24,
-            breakpoints: {
-                640: { slidesPerView: 1.5 },
-                1024: { slidesPerView: 2.5 },
-            }
-        });
-
         // Event listeners for quick add
         document.querySelectorAll('.btn-add-cart').forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -95,31 +86,29 @@ function createProductCard(product) {
     const isOut = status === 'Out Of Stock';
 
     return `
-        <div class="swiper-slide" style="height: auto;">
-            <a href="product.html?id=${product.id}" class="product-card" style="height: 100%;">
-                <div class="product-img-wrapper">
-                    ${status !== 'Available' ? `<span class="badge">${status}</span>` : ''}
-                    <img src="${image}" alt="${name}" class="product-img">
+        <a href="product.html?id=${product.id}" class="product-card" style="height: 100%;">
+            <div class="product-img-wrapper">
+                ${status !== 'Available' ? `<span class="badge">${status}</span>` : ''}
+                <img src="${image}" alt="${name}" class="product-img">
+            </div>
+            <div class="product-info">
+                <h3 class="product-title">${name}</h3>
+                <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 12px;">${defaultWeight}</div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
+                    <span class="product-price">${formatCurrency(displayPrice)}</span>
+                    <button class="btn-outline btn-add-cart" 
+                        style="padding: 8px 16px; border-radius: 8px;"
+                        data-id="${product.id}" 
+                        data-name="${name}" 
+                        data-price="${displayPrice}" 
+                        data-image="${image}"
+                        data-weight="${defaultWeight}"
+                        ${isOut ? 'disabled' : ''}>
+                        ${isOut ? 'Out' : 'Add'}
+                    </button>
                 </div>
-                <div class="product-info">
-                    <h3 class="product-title">${name}</h3>
-                    <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 12px;">${defaultWeight}</div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
-                        <span class="product-price">${formatCurrency(displayPrice)}</span>
-                        <button class="btn-outline btn-add-cart" 
-                            style="padding: 8px 16px; border-radius: 8px;"
-                            data-id="${product.id}" 
-                            data-name="${name}" 
-                            data-price="${displayPrice}" 
-                            data-image="${image}"
-                            data-weight="${defaultWeight}"
-                            ${isOut ? 'disabled' : ''}>
-                            ${isOut ? 'Out' : 'Add'}
-                        </button>
-                    </div>
-                </div>
-            </a>
-        </div>
+            </div>
+        </a>
     `;
 }
 

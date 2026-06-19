@@ -62,7 +62,7 @@
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr;
             gap: 24px;
         }
 
@@ -151,12 +151,15 @@
         <div class="shop-container">
             <!-- Sidebar -->
             <aside class="filter-sidebar">
-                <div class="search-bar-container">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" class="search-input" id="search-input" placeholder="Search products...">
+                <div class="search-bar-container" style="display: flex; gap: 8px;">
+                    <div style="position: relative; flex: 1;">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" class="search-input" id="search-input" placeholder="Search products...">
+                    </div>
+                    <button class="btn-primary" id="search-btn" style="padding: 0 16px; border-radius: var(--radius-sm);">Search</button>
                 </div>
 
-                <div class="filter-group">
+                <div class="filter-group" style="display: none;">
                     <h4 class="filter-title">Categories</h4>
                     <div class="category-list">
                         <label class="filter-label"><input type="radio" name="category" value="All" checked> All Products</label>
