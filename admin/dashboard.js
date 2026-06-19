@@ -40,7 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const now = Date.now();
         if (lockoutEnd > now) {
             btn1.disabled = true;
+            btn2.disabled = true;
             step1Form.style.opacity = '0.5';
+            step2Form.style.opacity = '0.5';
             lockoutBox.style.display = 'block';
             errBox.style.display = 'none';
             
@@ -51,11 +53,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (remaining <= 0) {
                     clearInterval(lockoutInterval);
                     btn1.disabled = false;
+                    btn2.disabled = false;
                     step1Form.style.opacity = '1';
+                    step2Form.style.opacity = '1';
                     lockoutBox.style.display = 'none';
-                    failedIdPass = 0; // Reset attempts after lockout
                 } else {
-                    lockoutBox.innerText = `Too many attempts. Try again in ${remaining}s`;
+                    lockoutBox.innerText = `Too many attempts. Locked out for ${remaining}s`;
                 }
             }, 1000);
             return true;
@@ -105,10 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (err) {
                 failedIdPass++;
                 if (failedIdPass >= 3) {
-                    lockoutEnd = Date.now() + (29 * 1000); // 29 seconds
+                    const penaltySeconds = Math.pow(2, failedIdPass - 3) * 30; // 30s, 60s, 120s...
+                    lockoutEnd = Date.now() + (penaltySeconds * 1000);
                     checkLockout();
                 } else {
-                    errBox.innerText = err.message + ` (${3 - failedIdPass} attempts left)`;
+                    errBox.innerText = err.message + ` (${3 - failedIdPass} attempts left before lockout)`;
                     errBox.style.display = 'block';
                 }
             } finally {
@@ -143,21 +147,24 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (err) {
                 failedPin++;
                 if (failedPin >= 3) {
-                    // Reset to step 1
-                    failedPin = 0;
+                    const penaltySeconds = Math.pow(2, failedPin - 3) * 30; // 30s, 60s, 120s...
+                    lockoutEnd = Date.now() + (penaltySeconds * 1000);
+                    checkLockout();
+                    
+                    // Reset to step 1 after locking out
                     tempAuthData = null;
                     document.getElementById('admin-pin').value = '';
                     step2Form.style.display = 'none';
                     step1Form.style.display = 'block';
-                    errBox.innerText = "Too many failed PIN attempts. Please login again.";
+                    errBox.innerText = "Too many failed PIN attempts. Returning to login.";
                     errBox.style.display = 'block';
                 } else {
-                    errBox.innerText = err.message + ` (${3 - failedPin} attempts left)`;
+                    errBox.innerText = err.message + ` (${3 - failedPin} attempts left before lockout)`;
                     errBox.style.display = 'block';
                 }
             } finally {
                 btn2.innerText = 'Authorize Access';
-                btn2.disabled = false;
+                if (!checkLockout()) btn2.disabled = false;
             }
         });
 

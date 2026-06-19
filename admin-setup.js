@@ -1,7 +1,6 @@
 import { db } from './firebase-config.js';
 import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// Utility to hash strings using SHA-256
 async function hashString(message) {
     const msgBuffer = new TextEncoder().encode(message);
     const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
