@@ -2,7 +2,7 @@
 <html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Orders Management | Admin Dashboard</title>
     <link rel="stylesheet" href="../index.css">
     <link rel="stylesheet" href="admin.css">
@@ -24,12 +24,11 @@
         </aside>
 
         <main class="admin-main">
-            <div class="mobile-header">
-                <img src="../logo.png" alt="Logo" style="height: 32px;">
-                <button class="mobile-menu-btn" onclick="document.getElementById('admin-sidebar').classList.toggle('open')">☰</button>
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;" class="no-print">
-                <h1 style="font-size: 2rem; font-family: var(--font-sans);">Orders Management</h1>
+            <div class="admin-header-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;" class="no-print">
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <button class="mobile-menu-btn" onclick="document.getElementById('admin-sidebar').classList.toggle('open')">☰</button>
+                    <h1 style="font-size: 2rem; font-family: var(--font-sans);">Orders Management</h1>
+                </div>
                 <select id="filter-status" style="padding: 8px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
                     <option value="All">All Orders</option>
                     <option value="Pending">Pending</option>

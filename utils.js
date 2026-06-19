@@ -92,12 +92,13 @@ export const updateCartBadge = () => {
 
 export const initBottomNav = () => {
     if (document.getElementById('mobile-bottom-nav')) return;
+    
+    const path = window.location.pathname;
+    if (path.includes('/admin/') || path.includes('admin-setup.html') || path.includes('admin-setup')) return;
 
     const nav = document.createElement('nav');
     nav.id = 'mobile-bottom-nav';
     nav.className = 'mobile-bottom-nav';
-    
-    const path = window.location.pathname;
     
     nav.innerHTML = `
         <a href="index.html" class="mobile-nav-item ${path.includes('index.html') || path.endsWith('/') ? 'active' : ''}">

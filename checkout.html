@@ -2,7 +2,7 @@
 <html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Secure Checkout | Dairy Garden</title>
     <link rel="stylesheet" href="index.css">
     <style>
@@ -119,6 +119,29 @@
             .checkout-layout { grid-template-columns: 1fr; }
             .summary-sidebar { position: static; }
         }
+
+        .delivery-options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .checkout-section {
+                padding: 24px 16px;
+            }
+            .checkout-layout {
+                padding: 16px 0;
+                gap: 24px;
+            }
+            .summary-sidebar {
+                padding: 24px 16px;
+            }
+            .delivery-options-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -137,7 +160,7 @@
             </nav>
 
             
-            <div class="search-bar">
+            <div class="search-bar" style="display: none;">
                 <input type="text" placeholder="Search for products, brands and more">
                 <span class="search-icon">🔍</span>
             </div>
@@ -163,15 +186,15 @@
                 <div class="checkout-section">
                     <h2 class="section-heading">1. Delivery Options</h2>
                     
-                    <div style="display: flex; gap: 16px; margin-bottom: 24px;">
-                        <label class="payment-box" style="flex:1; cursor: pointer; margin-bottom: 0;">
+                    <div class="delivery-options-grid">
+                        <label class="payment-box" style="cursor: pointer; margin-bottom: 0;">
                             <input type="radio" name="orderType" value="Delivery" checked onchange="window.toggleDeliveryType(this.value)">
                             <div>
                                 <div style="font-weight: 600;">Home Delivery</div>
                                 <div style="font-size: 0.85rem; color: var(--text-secondary);">₹50 charge</div>
                             </div>
                         </label>
-                        <label class="payment-box" style="flex:1; cursor: pointer; margin-bottom: 0;">
+                        <label class="payment-box" style="cursor: pointer; margin-bottom: 0;">
                             <input type="radio" name="orderType" value="Takeaway" onchange="window.toggleDeliveryType(this.value)">
                             <div>
                                 <div style="font-weight: 600;">Store Takeaway</div>

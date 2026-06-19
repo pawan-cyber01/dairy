@@ -315,6 +315,9 @@ ul {
 }
 
 @media (max-width: 768px) {
+  body {
+    padding-bottom: 80px;
+  }
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
   .nav-links { display: none; }
   
@@ -506,3 +509,10 @@ footer {
   margin-top: 60px;
   color: var(--text-secondary);
 }
+
+@media (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
+

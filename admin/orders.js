@@ -67,7 +67,7 @@ function renderOrders() {
                 </div>
             </div>
 
-            <div style="padding: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+            <div class="order-details-grid">
                 <!-- Customer Details -->
                 <div>
                     <h4 style="font-size: 0.95rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">Customer Details</h4>
@@ -124,14 +124,14 @@ function renderOrders() {
             </div>
 
             <!-- Actions -->
-            <div class="no-print" style="padding: 20px 24px; background: rgba(0,0,0,0.01); border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; border-radius: 0 0 var(--radius-lg) var(--radius-lg);">
-                <div style="display: flex; gap: 8px;">
+            <div class="order-actions-row no-print">
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
                     <button class="status-btn ${o.status === 'Pending' ? 'active' : ''}" onclick="updateStatus('${o.id}', 'Pending', ${i})">Pending</button>
                     <button class="status-btn ${o.status === 'Preparing' ? 'active' : ''}" onclick="updateStatus('${o.id}', 'Preparing', ${i})">Preparing</button>
                     <button class="status-btn ${o.status === 'Out For Delivery' ? 'active' : ''}" onclick="updateStatus('${o.id}', 'Out For Delivery', ${i})">Out For Delivery</button>
                     <button class="status-btn ${o.status === 'Delivered' ? 'active' : ''}" onclick="updateStatus('${o.id}', 'Delivered', ${i})">Delivered</button>
                 </div>
-                <div style="display: flex; gap: 8px;">
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
                     <button class="status-btn cancel ${o.status === 'Cancelled' ? 'active' : ''}" onclick="updateStatus('${o.id}', 'Cancelled', ${i})">Cancel Order</button>
                     <button class="btn-outline" style="padding: 6px 16px; font-size: 0.85rem; color: var(--error-color); border-color: var(--error-color);" onclick="deleteOrder('${o.id}')">🗑️ Delete</button>
                     <button class="btn-outline" style="padding: 6px 16px; font-size: 0.85rem;" onclick="window.print()">🖨️ Print Invoice</button>

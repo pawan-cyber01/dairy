@@ -78,12 +78,23 @@ function renderTable() {
             </td>
             <td style="padding: 12px;"><span style="padding: 4px 8px; border-radius: 4px; background: rgba(0,0,0,0.05); font-size: 0.85rem;">${p.status}</span></td>
             <td style="padding: 12px;">
+                <button class="btn-outline" style="padding:4px 8px; font-size:0.8rem; border-color:${p.isActive !== false ? 'var(--error-color)' : 'var(--success-color)'}; color:${p.isActive !== false ? 'var(--error-color)' : 'var(--success-color)'}; margin-right: 4px;" onclick="toggleProductActive('${p.id}', ${p.isActive !== false})">${p.isActive !== false ? 'Disable' : 'Enable'}</button>
                 <button class="btn-outline" style="padding:4px 8px; font-size:0.8rem; border-color:var(--brand-color);" onclick="editProduct(${i})">Edit</button>
                 <button class="btn-outline" style="padding:4px 8px; font-size:0.8rem; border-color:var(--error-color); color:var(--error-color);" onclick="deleteProduct('${p.id}')">Del</button>
             </td>
         </tr>
     `).join('');
 }
+
+window.toggleProductActive = async (id, currentStatus) => {
+    try {
+        await setDoc(doc(db, "products", id), { isActive: !currentStatus }, { merge: true });
+        loadProducts();
+    } catch(e) {
+        alert("Error updating product");
+        console.error(e);
+    }
+};
 
 window.editProduct = (index) => {
     const p = products[index];
